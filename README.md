@@ -4,7 +4,7 @@
 
 some scripts for working with Obsidian vaul
 
-## obleaner
+# obleaner
 
 **ob**sidian c**leaner**
 
@@ -14,6 +14,6 @@ some scripts for working with Obsidian vaul
 3. obleaner.pl <obsidian vault path>          # 1. + 2.
 ```
 
-## deps
+# deps
 
 - perl 5.10+
