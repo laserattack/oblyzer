@@ -57,14 +57,14 @@ sub cleanup {
     $mode //= "";
 
     if ($mode eq "pix") {
-        cleanupPix($start_dir);
+        cleanupPix $start_dir;
     }
     elsif ($mode eq "empty") {
-        cleanupEmpty($start_dir);
+        cleanupEmpty $start_dir;
     }
     else {
-        cleanupPix($start_dir);
-        cleanupEmpty($start_dir);
+        cleanupPix $start_dir;
+        cleanupEmpty $start_dir;
     }
 }
 
