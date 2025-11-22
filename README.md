@@ -6,7 +6,7 @@ some scripts for working with Obsidian vaul
 
 ## obleaner
 
-**ob**sidian c**cleaner**
+**ob**sidian c**leaner**
 
 ```
 1. obleaner.pl <obsidian vault path> pix      # delete all orphans pix
