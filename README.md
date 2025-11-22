@@ -9,9 +9,17 @@ some scripts for working with Obsidian vault
 **ob**sidian c**leaner**
 
 ```
-1. obleaner.pl <obsidian vault path> pix      # delete all orphans pix
-2. obleaner.pl <obsidian vault path> empty    # delete all 0-bytes md files
-3. obleaner.pl <obsidian vault path> all      # 1. + 2.
+Usage:
+  obleaner.pl [--dry-run] [--pix] [--empty] <obsidian vault path>
+
+Options:
+  --dry-run  Show what would be deleted, but do not delete anything.
+  --pix      Delete all orphaned images.
+  --empty    Delete all empty .md files.
+
+Examples:
+  obleaner.pl --dry-run --pix /path/to/vault
+  obleaner.pl --pix --empty /path/to/vault
 ```
 
 # deps

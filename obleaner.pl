@@ -1,13 +1,17 @@
 #!/usr/bin/env perl
-
 use feature "say";
 use strict;
 use warnings;
 use File::Find;
+use Getopt::Long;
+
+my $dry_run = 0;
+my $clean_pix = 0;
+my $clean_empty = 0;
+my $vault_path;
 
 sub fileContent {
     my ($fileName) = @_;
-
     return do {
                open my $fh, '<', $fileName or die $!;
                local $/;
@@ -18,7 +22,6 @@ sub fileContent {
 sub cleanupPix {
     my ($start_dir) = @_;
     my %pix;
-
     find(sub {
             return unless -f $_ and $_ =~ /^.+\.md$/i;
             my @matches = fileContent($File::Find::name) =~ /!\[\[(.*?)\]\]/g;
@@ -28,7 +31,7 @@ sub cleanupPix {
             return unless -f $_ and $_ =~ /^.+\.(png|jpe?g|webp|gif|bmp|ppm)$/i;
             unless (exists $pix{$_}) {
                 my $path = $File::Find::name;
-                if (unlink $path) {
+                if ($dry_run || unlink $path) {
                     say "Deleted '$path'";
                 } else {
                     warn "Failed to delete '$path': $!";
@@ -39,12 +42,11 @@ sub cleanupPix {
 
 sub cleanupEmpty {
     my ($start_dir) = @_;
-
     find(sub {
             return unless -f $_ and $_ =~ /^.+\.md$/i;
             my $path = $File::Find::name;
             return unless -z $path;
-            if (unlink $path) {
+            if ($dry_run || unlink $path) {
                 say "Deleted '$path'";
             } else {
                 warn "Failed to delete '$path': $!";
@@ -53,29 +55,45 @@ sub cleanupEmpty {
 }
 
 sub usage {
-    say '1. obleaner.pl <obsidian vault path> pix      # delete all orphans pix';
-    say '2. obleaner.pl <obsidian vault path> empty    # delete all 0-bytes md files';
-    say '3. obleaner.pl <obsidian vault path> all      # 1. + 2.';
+    say 'Usage:';
+    say '  obleaner.pl [--dry-run] [--pix] [--empty] <obsidian vault path>';
+    say '';
+    say 'Options:';
+    say '  --dry-run  Show what would be deleted, but do not delete anything.';
+    say '  --pix      Delete all orphaned images.';
+    say '  --empty    Delete all empty .md files.';
+    say '';
+    say 'Examples:';
+    say '  obleaner.pl --dry-run --pix /path/to/vault';
+    say '  obleaner.pl --pix --empty /path/to/vault';
 }
 
-sub cleanup {
-    my ($start_dir, $mode) = @_;
-    $mode //= "";
-
-    if ($mode eq "pix") {
-        cleanupPix $start_dir;
-    } elsif ($mode eq "empty") {
-        cleanupEmpty $start_dir;
-    } elsif ($mode eq "all") {
-        cleanupPix $start_dir;
-        cleanupEmpty $start_dir;
-    } else {
+sub main {
+    if ($clean_pix) {
+        cleanupPix($vault_path);
+    }
+    if ($clean_empty) {
+        cleanupEmpty($vault_path);
+    }
+    if (!$clean_pix && !$clean_empty) {
         usage();
     }
 }
 
-if (@ARGV < 2) {
+GetOptions(
+    "dry-run" => \$dry_run,
+    "pix" => \$clean_pix,
+    "empty" => \$clean_empty,
+) or do {
     usage();
+    exit;
+};
+
+if (@ARGV != 1) {
+    usage();
+    exit;
 } else {
-    cleanup @ARGV;
+    $vault_path = $ARGV[0];
 }
+
+main();
