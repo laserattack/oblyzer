@@ -13,7 +13,7 @@ Usage:
   obleaner.pl [--dry-run] [--pix | -p] [--empty | -e] <obsidian vault path>
 
 Options:
-  --dry-run      Show what would be deleted, but do not delete anything
+  --dry-run      Shows what would be done, but does not perform any actions
   --pix, -p      Delete all orphaned images
   --empty, -e    Delete all empty .md files
 
