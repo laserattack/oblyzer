@@ -56,16 +56,16 @@ sub cleanupEmpty {
 
 sub usage {
     say 'Usage:';
-    say '  obleaner.pl [--dry-run] [--pix] [--empty] <obsidian vault path>';
+    say '  obleaner.pl [--dry-run] [--pix | -p] [--empty | -e] <obsidian vault path>';
     say '';
     say 'Options:';
-    say '  --dry-run  Show what would be deleted, but do not delete anything.';
-    say '  --pix      Delete all orphaned images.';
-    say '  --empty    Delete all empty .md files.';
+    say '  --dry-run  Show what would be deleted, but do not delete anything';
+    say '  --pix, -p  Delete all orphaned images';
+    say '  --empty, -e Delete all empty .md files';
     say '';
     say 'Examples:';
-    say '  obleaner.pl --dry-run --pix /path/to/vault';
-    say '  obleaner.pl --pix --empty /path/to/vault';
+    say '  obleaner.pl --dry-run -p /path/to/vault';
+    say '  obleaner.pl -p -e /path/to/vault';
 }
 
 sub main {
@@ -81,9 +81,9 @@ sub main {
 }
 
 GetOptions(
-    "dry-run" => \$dry_run,
-    "pix" => \$clean_pix,
-    "empty" => \$clean_empty,
+    "dry-run", \$dry_run,
+    "pix|p", \$clean_pix,
+    "empty|e", \$clean_empty,
 ) or do {
     usage();
     exit;
