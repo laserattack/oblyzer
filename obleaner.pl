@@ -59,9 +59,9 @@ sub usage {
     say '  obleaner.pl [--dry-run] [--pix | -p] [--empty | -e] <obsidian vault path>';
     say '';
     say 'Options:';
-    say '  --dry-run  Show what would be deleted, but do not delete anything';
-    say '  --pix, -p  Delete all orphaned images';
-    say '  --empty, -e Delete all empty .md files';
+    say '  --dry-run      Shows what would be done, but does not perform any actions';
+    say '  --pix, -p      Delete all orphaned images';
+    say '  --empty, -e    Delete all empty .md files';
     say '';
     say 'Examples:';
     say '  obleaner.pl --dry-run -p /path/to/vault';
