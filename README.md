@@ -2,7 +2,7 @@
 
 **ob**sidian ana**lyzer**
 
-some scripts for working with Obsidian vaul
+some scripts for working with Obsidian vault
 
 # obleaner
 
