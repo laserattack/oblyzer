@@ -11,7 +11,7 @@ some scripts for working with Obsidian vault
 ```
 1. obleaner.pl <obsidian vault path> pix      # delete all orphans pix
 2. obleaner.pl <obsidian vault path> empty    # delete all 0-bytes md files
-3. obleaner.pl <obsidian vault path>          # 1. + 2.
+3. obleaner.pl <obsidian vault path> all      # 1. + 2.
 ```
 
 # deps

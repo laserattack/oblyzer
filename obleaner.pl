@@ -52,26 +52,30 @@ sub cleanupEmpty {
         }, $start_dir);
 }
 
+sub usage {
+    say '1. obleaner.pl <obsidian vault path> pix      # delete all orphans pix';
+    say '2. obleaner.pl <obsidian vault path> empty    # delete all 0-bytes md files';
+    say '3. obleaner.pl <obsidian vault path> all      # 1. + 2.';
+}
+
 sub cleanup {
     my ($start_dir, $mode) = @_;
     $mode //= "";
 
     if ($mode eq "pix") {
         cleanupPix $start_dir;
-    }
-    elsif ($mode eq "empty") {
+    } elsif ($mode eq "empty") {
         cleanupEmpty $start_dir;
-    }
-    else {
+    } elsif ($mode eq "all") {
         cleanupPix $start_dir;
         cleanupEmpty $start_dir;
+    } else {
+        usage();
     }
 }
 
-if (@ARGV < 1) {
-    say '1. obleaner.pl <obsidian vault path> pix      # delete all orphans pix';
-    say '2. obleaner.pl <obsidian vault path> empty    # delete all 0-bytes md files';
-    say '3. obleaner.pl <obsidian vault path>          # 1. + 2.';
+if (@ARGV < 2) {
+    usage();
 } else {
     cleanup @ARGV;
 }
