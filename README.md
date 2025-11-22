@@ -13,9 +13,9 @@ Usage:
   obleaner.pl [--dry-run] [--pix | -p] [--empty | -e] <obsidian vault path>
 
 Options:
-  --dry-run  Show what would be deleted, but do not delete anything
-  --pix, -p  Delete all orphaned images
-  --empty, -e Delete all empty .md files
+  --dry-run      Show what would be deleted, but do not delete anything
+  --pix, -p      Delete all orphaned images
+  --empty, -e    Delete all empty .md files
 
 Examples:
   obleaner.pl --dry-run -p /path/to/vault
