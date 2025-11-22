@@ -24,4 +24,4 @@ Examples:
 
 # deps
 
-- perl 5.10+
+- Perl 5.10+
