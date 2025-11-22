@@ -57,7 +57,7 @@ sub cleanupEmpty {
 
 sub usage {
     say 'Usage:';
-    say '  obleaner.pl [--dry-run] [--pix | -p] [--empty | -e] <obsidian vault path>';
+    say '  obleaner.pl [--dry-run] [--pix|-p] [--empty|-e] <obsidian vault path>';
     say '';
     say 'Options:';
     say '  --dry-run      Shows what would be done, but does not perform any actions';

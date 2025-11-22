@@ -10,7 +10,7 @@ some scripts for working with Obsidian vault
 
 ```
 Usage:
-  obleaner.pl [--dry-run] [--pix | -p] [--empty | -e] <obsidian vault path>
+  obleaner.pl [--dry-run] [--pix|-p] [--empty|-e] <obsidian vault path>
 
 Options:
   --dry-run      Shows what would be done, but does not perform any actions
